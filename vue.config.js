@@ -60,8 +60,8 @@ module.exports = {
       }]),
       new SWPrecacheWebpackPlugin({
         cacheId: 'global-train-app',
-        filename: 'service-worker-cache.js',
-        staticFileGlobs: ['dist/**/*.{js,css}', '/'],
+        filename: 'service-worker.js',
+        staticFileGlobs: ['/dist/**/*.{js,css}', '/'],
         minify: true,
         stripPrefix: 'dist/',
         dontCacheBustUrlsMatching: /\.\w{6}\./
