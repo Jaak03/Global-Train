@@ -1,6 +1,8 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+
 module.exports = {
   "transpileDependencies": [
     "vuetify"
@@ -55,7 +57,15 @@ module.exports = {
         from: path.resolve(__dirname, 'public'),
         to: path.resolve(__dirname, 'dist'),
         toType: 'dir'
-      }])
+      }]),
+      new SWPrecacheWebpackPlugin({
+        cacheId: 'global-train-app',
+        filename: 'service-worker-cache.js',
+        staticFileGlobs: ['dist/**/*.{js,css}', '/'],
+        minify: true,
+        stripPrefix: 'dist/',
+        dontCacheBustUrlsMatching: /\.\w{6}\./
+      })
     ],
   
     
