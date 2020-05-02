@@ -4,6 +4,7 @@ PWA to sync training across timezones.
 ## Tech stack
 - VueJS
 - Webpack
+- Vuetify
 
 ## Project setup
 ```
