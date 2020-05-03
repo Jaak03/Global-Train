@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-container">
     <v-form>
       <v-text-field
         label="Username"
@@ -17,9 +17,7 @@
           class="ma-2 base-button si-button"
           v-bind:class="{ 'off-button': login, 'fa fa-sign-in': login_icon }"
           @click="clickLogin"
-        >
-          <router-link to="/home">{{labelSI}}</router-link>
-        </button>
+        >{{labelSI}}</button>
         <button
           class="ma-2 base-button su-button"
           v-bind:class="{ 'off-button': !login, 'fa fa-user-plus': !login_icon }"
@@ -48,6 +46,7 @@ export default {
     clickLogin() {
       event.preventDefault(); 
       if (this.login) this.toggleLogin();
+      else this.$router.push('/home');
     },
     clickSignup() {
       event.preventDefault(); 

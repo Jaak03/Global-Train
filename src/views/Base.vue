@@ -26,14 +26,14 @@
   .base-container {
     min-height: 100%;
     display: grid;
-    grid-template-columns: 50px auto 50px;
-    grid-template-rows: 50px auto 50px;
+    grid-template-columns: 7.5% auto 7.5%;
+    grid-template-rows: 5% auto 5%;
   }
 
   .router-link {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
-    grid-row-end: 2;
+    grid-row-end: 3;
   }
 </style>
