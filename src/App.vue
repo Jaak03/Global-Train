@@ -1,19 +1,17 @@
 <template>
   <v-app>
-    <Login/>
+    <Base/>
   </v-app>
 </template>
 
 <script>
-import Login from './components/page/Login';
+import Base from './components/page/Base';
 
 export default {
   name: 'App',
-
   components: {
-    Login,
+    Base,
   },
-
   data: () => ({
     //
   }),
