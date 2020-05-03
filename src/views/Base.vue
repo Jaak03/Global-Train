@@ -24,10 +24,9 @@
 
 <style>
   .base-container {
-    min-height: 100%;
     display: grid;
-    grid-template-columns: 7.5% auto 7.5%;
-    grid-template-rows: 5% auto 5%;
+    grid-template-columns: 5rem auto 5rem;
+    grid-template-rows: 5rem auto 5rem;
   }
 
   .router-link {
