@@ -1,7 +1,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
   "transpileDependencies": [
@@ -58,12 +58,10 @@ module.exports = {
         to: path.resolve(__dirname, 'dist'),
         toType: 'dir'
       }]),
-      new SWPrecacheWebpackPlugin({
+      new GenerateSW({
         cacheId: 'global-train-app',
-        filename: 'service-worker.js',
-        staticFileGlobs: ['/dist/**/*.{js,css}', '/'],
-        minify: true,
-        stripPrefix: 'dist/',
+        cleanupOutdatedCaches: true,
+        include: ['/dist/**/*.{js,css}', '/'],
         dontCacheBustUrlsMatching: /\.\w{6}\./
       })
     ],
