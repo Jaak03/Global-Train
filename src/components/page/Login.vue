@@ -13,6 +13,10 @@
           :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           @click:append="toggleShowPassword"
         />
+        <div class="submit-options">
+          <v-btn class="ma-2 toets" type="submit" large color="primary">Sign in</v-btn>
+          <v-btn class="ma-2" type="submit" large color="secondary">Sign up</v-btn>
+        </div>
       </v-form>
     </v-card-text>
   </v-card>
@@ -34,5 +38,24 @@ export default {
 </script>
 
 <style>
+  .v-form {
+    margin: 5%;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .v-form > .v-text-field {
+    min-width: 100px;
+  }
+
+  .submit-options {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .ma-2 {
+    width: 250px;
+  }
 
 </style>

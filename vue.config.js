@@ -20,23 +20,6 @@ module.exports = {
 
     node: false,
 
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          loader: 'babel-loader'
-        },
-        {
-          test: /\.css$/,
-          use: [
-            'vue-style-loader',
-            'css-loader'
-          ],
-          exclude: /\.module\.css$/
-        }
-      ]
-    },
-
     resolve: {
       extensions: [
         '.js',
@@ -59,10 +42,20 @@ module.exports = {
         toType: 'dir'
       }]),
       new GenerateSW({
-        cacheId: 'global-train-app',
-        cleanupOutdatedCaches: true,
-        include: ['/dist/**/*.{js,css}', '/'],
-        dontCacheBustUrlsMatching: /\.\w{6}\./
+        // Do not precache images
+        exclude: [/\.(?:png|jpg|jpeg|svg)$/],
+
+        // Define runtime caching rules.
+        runtimeCaching: [{
+          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images',
+            expiration: {
+              maxEntries: 10,
+            },
+          },
+        }],      
       })
     ],
   
