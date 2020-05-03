@@ -1,33 +1,33 @@
 <template>
-  <v-card>
-    <v-card-text>
-      <v-form>
-        <v-text-field
-          label="Username"
-          prepend-icon="mdi-account-circle"
-        />
-        <v-text-field
-          label="Password"
-          :type="showPassword ? 'text' : 'password'"
-          prepend-icon="mdi-lock"
-          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="toggleShowPassword"
-        />
-        <div class="submit-options">
-          <button
-            class="ma-2 base-button si-button"
-            v-bind:class="{ 'off-button': login, 'fa fa-sign-in': login_icon }"
-            @click="clickLogin"
-          >{{labelSI}}</button>
-          <button
-            class="ma-2 base-button su-button"
-            v-bind:class="{ 'off-button': !login, 'fa fa-user-plus': !login_icon }"
-            @click="clickSignup"
-          >{{labelSU}}</button>
-        </div>
-      </v-form>
-    </v-card-text>
-  </v-card>
+  <div>
+    <v-form>
+      <v-text-field
+        label="Username"
+        prepend-icon="mdi-account-circle"
+      />
+      <v-text-field
+        label="Password"
+        :type="showPassword ? 'text' : 'password'"
+        prepend-icon="mdi-lock"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="toggleShowPassword"
+      />
+      <div class="submit-options">
+        <button
+          class="ma-2 base-button si-button"
+          v-bind:class="{ 'off-button': login, 'fa fa-sign-in': login_icon }"
+          @click="clickLogin"
+        >
+          <router-link to="/home">{{labelSI}}</router-link>
+        </button>
+        <button
+          class="ma-2 base-button su-button"
+          v-bind:class="{ 'off-button': !login, 'fa fa-user-plus': !login_icon }"
+          @click="clickSignup"
+        >{{labelSU}}</button>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
@@ -51,7 +51,9 @@ export default {
     },
     clickSignup() {
       event.preventDefault(); 
+      console.log(this.$router);
       if(!this.login) this.toggleLogin();
+      else this.$router.push('/home');
     },
     toggleLogin() {
       this.login = !this.login;
@@ -88,6 +90,10 @@ export default {
 
   .si-button {
     background-color: rgb(0, 45, 87);
+    color: rgb(216, 216, 216);
+  }
+
+  .si-button a{
     color: rgb(216, 216, 216);
   }
 

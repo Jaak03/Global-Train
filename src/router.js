@@ -1,11 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-// Page content
-import Home from './views/Home.vue';
-import Login from './views/Login.vue';
-import Base from './views/Base.vue';
-
 Vue.use(Router)
 
 export default new Router({
@@ -13,22 +8,22 @@ export default new Router({
     {
       path: '/',
       name: 'base',
-      component: Base
+      component: () => import('./views/Base.vue')
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: () => import('./views/Login.vue')
     },
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: () => import('./views/Home.vue')
     },
     {
       path: '**',
       name: 'pageNotFound',
-      component: Base
+      component: () => import('./views/Base.vue')
     },
   ]
 })

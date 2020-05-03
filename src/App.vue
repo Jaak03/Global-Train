@@ -34,4 +34,11 @@ export default {
   button:focus {
     outline:0;
   }
+
+  a {
+    background-color: lightblue;
+    color: inherit;
+    text-decoration: none;
+  }
+
 </style>

@@ -1,10 +1,6 @@
 <template>
   <div class="base-container">
     <div class="router-link">
-      <h1>{{title}}</h1>
-      <ul>
-        <li><router-link to="/login">login</router-link></li>
-      </ul>
       <router-view/>
     </div>
   </div>
@@ -13,6 +9,10 @@
 <script>
   export default {
     name: 'Base',
+    mounted() {
+      console.log('No token found');
+      if(!localStorage.token) this.$router.push('/login');
+    },
     components: {
     },
     data: () => ({
@@ -35,6 +35,5 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 2;
-    background-color: cornflowerblue;
   }
 </style>
