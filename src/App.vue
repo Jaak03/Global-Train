@@ -32,4 +32,8 @@ export default {
   .v-text-field {
     font-size: 1.5em;
   }
+
+  button:focus {
+    outline:0;
+  }
 </style>

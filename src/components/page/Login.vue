@@ -16,14 +16,13 @@
         <div class="submit-options">
           <button
             class="ma-2 base-button si-button"
-            v-bind:class="{ 'off-button fa fa-sign-in': login }"
+            v-bind:class="{ 'off-button': login, 'fa fa-sign-in': login_icon }"
             @click="clickLogin"
           >{{labelSI}}</button>
           <button
             class="ma-2 base-button su-button"
-            v-bind:class="{ 'off-button fa fa-user-plus': !login }"
+            v-bind:class="{ 'off-button': !login, 'fa fa-user-plus': !login_icon }"
             @click="clickSignup"
-            append-icon="mdi-login"
           >{{labelSU}}</button>
         </div>
       </v-form>
@@ -37,6 +36,7 @@ export default {
     return {
       showPassword: false,
       login: false,
+      login_icon: false,
       labelSU: '',
       labelSI: 'Sign in'
     }
@@ -55,8 +55,11 @@ export default {
     },
     toggleLogin() {
       this.login = !this.login;
-      this.labelSU = this.login ? 'Sign up' : '';
-      this.labelSI = this.login ? '' : 'Sign in';
+      setTimeout(() => {
+        this.login_icon = !this.login_icon;
+        this.labelSU = this.login ? 'Sign up' : '';
+        this.labelSI = this.login ? '' : 'Sign in';
+      }, 50); 
     }
   }
 }
@@ -91,6 +94,10 @@ export default {
   .su-button {
     background-color: rgb(201, 222, 241);
     color: rgb(61, 61, 61);
+    border: gray;
+    border-width: 2px;
+    border-style: solid;
+
   }
 
   .off-button {
