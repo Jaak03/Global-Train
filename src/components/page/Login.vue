@@ -14,8 +14,8 @@
           @click:append="toggleShowPassword"
         />
         <div class="submit-options">
-          <v-btn class="ma-2 toets" type="submit" large color="primary">Sign in</v-btn>
-          <v-btn class="ma-2" type="submit" large color="secondary">Sign up</v-btn>
+          <v-btn class="ma-2 btn-si" type="submit" large color="primary">Sign in</v-btn>
+          <v-btn class="ma-2 btn-su" type="submit" large color="secondary">Sign up</v-btn>
         </div>
       </v-form>
     </v-card-text>
@@ -42,6 +42,7 @@ export default {
     margin: 5%;
     display: flex;
     flex-flow: column wrap;
+    transition-duration: 15ms;
   }
 
   .v-form > .v-text-field {
@@ -55,7 +56,12 @@ export default {
   }
 
   .ma-2 {
-    width: 250px;
+    width: 50vh;
   }
 
+  @media (max-width: 405px) {
+    .ma-2 {
+      width: 30vh;
+    }
+  }
 </style>
