@@ -13,9 +13,6 @@
 <script>
   export default {
     name: 'Base',
-    mounted() {
-      this.$route.push('/login')
-    },
     components: {
     },
     data: () => ({

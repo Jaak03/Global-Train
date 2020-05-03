@@ -67,7 +67,7 @@ export default {
 
 <style>
   .v-form {
-    margin: 5%;
+    padding: 25% 0% 25% 0%;
     display: flex;
     flex-flow: column wrap;
   }
