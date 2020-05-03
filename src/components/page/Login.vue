@@ -14,14 +14,17 @@
           @click:append="toggleShowPassword"
         />
         <div class="submit-options">
-          <button 
+          <button
             class="ma-2 base-button si-button"
-            type="submit"
-          >Sign in</button>
-          <button 
+            v-bind:class="{ 'off-button fa fa-sign-in': login }"
+            @click="clickLogin"
+          >{{labelSI}}</button>
+          <button
             class="ma-2 base-button su-button"
-            type="submit"
-          >Sign up</button>
+            v-bind:class="{ 'off-button fa fa-user-plus': !login }"
+            @click="clickSignup"
+            append-icon="mdi-login"
+          >{{labelSU}}</button>
         </div>
       </v-form>
     </v-card-text>
@@ -33,12 +36,27 @@ export default {
   data() {
     return {
       showPassword: false,
-      state: 'login'
+      login: false,
+      labelSU: '',
+      labelSI: 'Sign in'
     }
   },
   methods: {
     toggleShowPassword() {
       this.showPassword = !this.showPassword;
+    },
+    clickLogin() {
+      event.preventDefault(); 
+      if (this.login) this.toggleLogin();
+    },
+    clickSignup() {
+      event.preventDefault(); 
+      if(!this.login) this.toggleLogin();
+    },
+    toggleLogin() {
+      this.login = !this.login;
+      this.labelSU = this.login ? 'Sign up' : '';
+      this.labelSI = this.login ? '' : 'Sign in';
     }
   }
 }
@@ -61,12 +79,8 @@ export default {
     justify-content: center;
   }
 
-  .ma-2 {
-    width: 50vh;
-  }
-
   .base-button {
-    width: 32;
+    width: 50vh;
   }
 
   .si-button {
@@ -79,9 +93,23 @@ export default {
     color: rgb(61, 61, 61);
   }
 
-  @media (max-width: 405px) {
-    .ma-2 {
-      width: 30vh;
+  .off-button {
+    width: 50px;
+    border: gray;
+    border-width: 2px;
+    border-style: solid;
+  }
+
+  @media (max-width: 500px) {
+    .base-button {
+      width: 20vh;
+    }
+
+    .off-button {
+      width: 50px;
+      border: gray;
+      border-width: 2px;
+      border-style: solid;
     }
   }
 </style>

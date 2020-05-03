@@ -23,8 +23,8 @@ export default {
 <style>
   .base-button {
     border-radius: 50px;
-    transition: width 30ms;
-    height: 40px;
+    transition: width 100ms;
+    height: 50px;
     box-shadow: 2px 2px 3px #d6d6d6;
     font-size: 1.5em;
   }
