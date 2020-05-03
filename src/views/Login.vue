@@ -83,7 +83,7 @@ export default {
   }
 
   .base-button {
-    width: 50vh;
+    width: 45%;
   }
 
   .si-button {
@@ -97,7 +97,6 @@ export default {
     border: gray;
     border-width: 2px;
     border-style: solid;
-
   }
 
   .off-button {
@@ -105,18 +104,5 @@ export default {
     border: gray;
     border-width: 2px;
     border-style: solid;
-  }
-
-  @media (max-width: 500px) {
-    .base-button {
-      width: 20vh;
-    }
-
-    .off-button {
-      width: 50px;
-      border: gray;
-      border-width: 2px;
-      border-style: solid;
-    }
   }
 </style>
