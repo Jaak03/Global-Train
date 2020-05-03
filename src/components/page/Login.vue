@@ -59,7 +59,7 @@ export default {
         this.login_icon = !this.login_icon;
         this.labelSU = this.login ? 'Sign up' : '';
         this.labelSI = this.login ? '' : 'Sign in';
-      }, 50); 
+      }, 5); 
     }
   }
 }
