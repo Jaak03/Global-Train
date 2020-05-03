@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Base from './components/page/Base';
+import Base from './views/Base';
 
 export default {
   name: 'App',
