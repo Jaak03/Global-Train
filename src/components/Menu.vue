@@ -14,6 +14,7 @@
         <template v-slot:activator>
           <v-btn
             v-model="fab"
+            style="color: rgb(216, 216, 216);"
             color="rgb(0, 45, 87)"
             dark
             fab
@@ -25,6 +26,7 @@
         </template>
         <v-btn
           color="rgb(0, 45, 87)"
+          style="color: rgb(216, 216, 216);"
           fab
           dark
           small
@@ -33,6 +35,7 @@
         </v-btn>
         <v-btn
           class="menu-fab"
+          style="color: rgb(216, 216, 216);"
           fab
           dark
           small
@@ -42,10 +45,12 @@
         </v-btn>
         <v-btn
           class="menu-fab"
+          style="color: rgb(216, 216, 216);"
           fab
           dark
           small
           color="rgb(0, 45, 87)"
+          @click="logout"
         >
           <v-icon>mdi-logout</v-icon>
         </v-btn>

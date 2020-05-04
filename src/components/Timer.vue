@@ -22,7 +22,6 @@ export default {
     bottom: 5rem;
     left: 0;
     right: 0;
-      
     margin: auto;
   }
 

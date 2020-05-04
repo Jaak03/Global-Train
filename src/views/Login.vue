@@ -3,10 +3,12 @@
     <v-form>
       <v-text-field
         label="Username"
+        v-model="loginDetails.username"
         prepend-icon="mdi-account-circle"
       />
       <v-text-field
         label="Password"
+        v-model="loginDetails.password"
         :type="showPassword ? 'text' : 'password'"
         prepend-icon="mdi-lock"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -36,7 +38,11 @@ export default {
       login: false,
       login_icon: false,
       labelSU: '',
-      labelSI: 'Sign in'
+      labelSI: 'Sign in',
+      loginDetails: {
+        username: '',
+        password: ''
+      }
     }
   },
   mounted() {
@@ -46,17 +52,22 @@ export default {
     toggleShowPassword() {
       this.showPassword = !this.showPassword;
     },
-    clickLogin() {
+    async loginWithDetails() {
+      console.log(this.loginDetails);
+      return true;
+    },
+    async clickLogin() {
       event.preventDefault(); 
       if (this.login) this.toggleLogin();
-      // else this.$router.push('/home');
-      this.$store.commit('toggleMenuShow');
+      else {
+        const loggedIn = await this.loginWithDetails();
+        if(loggedIn) this.$router.push('/home');
+      }
     },
     clickSignup() {
       event.preventDefault(); 
       console.log(this.$router);
       if(!this.login) this.toggleLogin();
-      else this.$router.push('/home');
     },
     toggleLogin() {
       this.login = !this.login;
