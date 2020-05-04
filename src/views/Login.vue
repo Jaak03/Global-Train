@@ -46,7 +46,8 @@ export default {
     clickLogin() {
       event.preventDefault(); 
       if (this.login) this.toggleLogin();
-      else this.$router.push('/home');
+      // else this.$router.push('/home');
+      this.$store.commit('toggleMenuShow');
     },
     clickSignup() {
       event.preventDefault(); 

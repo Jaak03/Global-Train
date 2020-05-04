@@ -1,5 +1,5 @@
 <template>
-  <div v-show="showMenu" class="menu">
+  <div v-show="this.$store.state.showFab" class="menu">
     <v-fab-transition>
       <v-speed-dial
         v-model="fab"
@@ -59,7 +59,6 @@
   export default {
     data() {
       return {
-        showMenu: true,
         direction: 'left',
         fab: false,
         fling: false,
