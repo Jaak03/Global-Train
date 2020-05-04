@@ -17,9 +17,10 @@
             color="blue darken-2"
             dark
             fab
+            medium
           >
             <v-icon v-if="fab">mdi-close</v-icon>
-            <v-icon v-else>mdi-account-circle</v-icon>
+            <v-icon v-else>mdi-menu</v-icon>
           </v-btn>
         </template>
         <v-btn
@@ -62,7 +63,7 @@
         direction: 'left',
         fab: false,
         fling: false,
-        hover: false,
+        hover: true,
         tabs: null,
         top: false,
         right: false,

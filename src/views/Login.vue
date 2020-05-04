@@ -60,7 +60,7 @@ export default {
         this.login_icon = !this.login_icon;
         this.labelSU = this.login ? 'Sign up' : '';
         this.labelSI = this.login ? '' : 'Sign in';
-      }, 5); 
+      }, 10); 
     }
   }
 }
@@ -74,7 +74,7 @@ export default {
   }
 
   .v-form > .v-text-field {
-    min-width: 100px;
+    min-width: 80%;
   }
 
   .submit-options {

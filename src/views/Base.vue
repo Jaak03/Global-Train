@@ -28,7 +28,7 @@
 <style>
   .base-container {
     display: grid;
-    grid-template-columns: 5rem auto 5rem;
+    grid-template-columns: 1rem auto 1rem;
     grid-template-rows: 5rem auto 5rem;
   }
 
