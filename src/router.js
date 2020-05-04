@@ -21,6 +21,16 @@ export default new Router({
       component: () => import('./views/Home.vue')
     },
     {
+      path: '/settings',
+      name: 'home',
+      component: () => import('./views/Settings.vue')
+    },
+    {
+      path: '/statistics',
+      name: 'statistics',
+      component: () => import('./views/Stats.vue')
+    },
+    {
       path: '**',
       name: 'pageNotFound',
       component: () => import('./views/Base.vue')

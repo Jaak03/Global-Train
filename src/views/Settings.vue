@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Statistics plek</p>
+    <p>Settings page.</p>
   </div>
 </template>
 

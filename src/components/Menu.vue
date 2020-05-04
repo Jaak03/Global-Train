@@ -30,6 +30,7 @@
           fab
           dark
           small
+          @click="go('stats')"
         >
           <v-icon>mdi-weight-lifter</v-icon>
         </v-btn>
@@ -40,6 +41,7 @@
           dark
           small
           color="rgb(0, 45, 87)"
+          @click="go('settings')"
         >
           <v-icon>mdi-cog</v-icon>
         </v-btn>
@@ -50,7 +52,18 @@
           dark
           small
           color="rgb(0, 45, 87)"
-          @click="logout"
+          @click="go('home')"
+        >
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+        <v-btn
+          class="menu-fab"
+          style="color: rgb(216, 216, 216);"
+          fab
+          dark
+          small
+          color="rgb(0, 45, 87)"
+          @click="go('logout')"
         >
           <v-icon>mdi-logout</v-icon>
         </v-btn>
@@ -76,9 +89,22 @@
       }
     },
     methods: {
-      logout() {
-        if(localStorage.token) localStorage.removeItem('token');
-        this.$router.push('/');
+      go(action) {
+        switch(action) {
+          case 'logout':
+              if(localStorage.token) localStorage.removeItem('token');
+              this.$router.replace('/');
+              break;
+          case 'home':
+            this.$router.replace('/home');
+            break;
+          case 'settings':
+            this.$router.replace('/settings');
+            break;
+          case 'stats':
+            this.$router.replace('/statistics');
+            break;
+        }
       }
     }
   }
