@@ -1,10 +1,17 @@
 <template>
-  <p>Toets hier die component.</p>
+  <div>
+    <Timer/>
+  </div>
 </template>
 
 <script>
-export default {
+import Timer from '../components/Timer';
 
+export default {
+  name: 'Home',
+  components: {
+    Timer,
+  }
 }
 </script>
 
