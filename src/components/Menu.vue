@@ -14,7 +14,7 @@
         <template v-slot:activator>
           <v-btn
             v-model="fab"
-            color="blue darken-2"
+            color="rgb(0, 45, 87)"
             dark
             fab
             medium
