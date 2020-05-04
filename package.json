@@ -1,6 +1,6 @@
 {
   "name": "global-train",
-  "version": "0.11.3",
+  "version": "0.11.4",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
