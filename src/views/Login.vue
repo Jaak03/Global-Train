@@ -39,6 +39,9 @@ export default {
       labelSI: 'Sign in'
     }
   },
+  mounted() {
+    this.$store.commit('changeMenuVisibility', { visibility: false });
+  },
   methods: {
     toggleShowPassword() {
       this.showPassword = !this.showPassword;

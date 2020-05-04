@@ -8,14 +8,8 @@ export default new Vuex.Store({
     showFab: false,
   },
   mutations: {
-    toggleMenuShow(state) {
-      state.showFab = !state.showFab;
+    changeMenuVisibility(state, payload) {
+      state.showFab = payload.visibility;
     },
-    showMenu(state) {
-      state.showFab = true;
-    },
-    hideMenu(state) {
-      state.showFab = false;
-    }
   }
 });

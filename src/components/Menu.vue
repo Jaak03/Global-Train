@@ -24,33 +24,32 @@
           </v-btn>
         </template>
         <v-btn
+          color="rgb(0, 45, 87)"
           fab
           dark
           small
-          color="green"
         >
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon>mdi-weight-lifter</v-icon>
         </v-btn>
         <v-btn
+          class="menu-fab"
           fab
           dark
           small
-          color="indigo"
+          color="rgb(0, 45, 87)"
         >
-          <v-icon>mdi-plus</v-icon>
+          <v-icon>mdi-cog</v-icon>
         </v-btn>
         <v-btn
+          class="menu-fab"
           fab
           dark
           small
-          color="red"
+          color="rgb(0, 45, 87)"
         >
-          <v-icon>mdi-delete</v-icon>
+          <v-icon>mdi-logout</v-icon>
         </v-btn>
       </v-speed-dial>
-      <!-- <v-btn color="success" fab x-large dark>
-        <v-icon>mdi-menu</v-icon>
-      </v-btn> -->
     </v-fab-transition>
   </div>
 </template>
@@ -71,6 +70,12 @@
         transition: 'slide-y-reverse-transition',
       }
     },
+    methods: {
+      logout() {
+        if(localStorage.token) localStorage.removeItem('token');
+        this.$router.push('/');
+      }
+    }
   }
 </script>
 
