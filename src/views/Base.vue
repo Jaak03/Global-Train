@@ -3,10 +3,12 @@
     <div class="router-link">
       <router-view/>
     </div>
+    <Menu class="menu"/>
   </div>
 </template>
 
 <script>
+  import Menu from '../components/Menu';
   export default {
     name: 'Base',
     mounted() {
@@ -14,6 +16,7 @@
       if(!localStorage.token) this.$router.push('/login');
     },
     components: {
+      Menu,
     },
     data: () => ({
       title: 'Toets hier'
@@ -34,5 +37,12 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+  }
+
+  .menu {
+    position: absolute;
+    display: block;
+    right: 0px;
+    bottom: 0px;
   }
 </style>
