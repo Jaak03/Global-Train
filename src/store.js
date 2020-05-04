@@ -10,6 +10,12 @@ export default new Vuex.Store({
   mutations: {
     toggleMenuShow(state) {
       state.showFab = !state.showFab;
+    },
+    showMenu(state) {
+      state.showFab = true;
+    },
+    hideMenu(state) {
+      state.showFab = false;
     }
   }
 });
