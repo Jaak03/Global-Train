@@ -53,6 +53,7 @@
           small
           color="rgb(0, 45, 87)"
           @click="go('home')"
+          v-show="pages.home"
         >
           <v-icon>mdi-home</v-icon>
         </v-btn>
@@ -86,6 +87,9 @@
         bottom: false,
         left: false,
         transition: 'slide-y-reverse-transition',
+        pages: {
+          home: this.$router.history.current.name !== 'home'
+        }
       }
     },
     methods: {
@@ -105,7 +109,7 @@
             this.$router.replace('/statistics');
             break;
         }
-      }
+      },
     }
   }
 </script>
