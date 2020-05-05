@@ -13,6 +13,7 @@
       >
         <template v-slot:activator>
           <v-btn
+            @click="changeMenu"
             v-model="fab"
             style="color: rgb(216, 216, 216);"
             color="rgb(0, 45, 87)"
@@ -61,21 +62,25 @@
     methods: {
       go(action) {
         switch(action) {
-          case 'logout':
+          case '/logout':
               if(localStorage.token) localStorage.removeItem('token');
               this.$router.replace('/');
               break;
-          case 'home':
+          case '/home':
             this.$router.replace('/home');
             break;
-          case 'settings':
+          case '/settings':
             this.$router.replace('/settings');
             break;
-          case 'stats':
+          case '/statistics':
             this.$router.replace('/statistics');
             break;
         }
       },
+      changeMenu() {
+        const page = this.$router.history.current.path;
+        this.$store.commit('customizePageMenu', { page });
+      }
     }
   }
 </script>
