@@ -70,7 +70,7 @@
     <v-row justify="center" align="center">
       <v-col cols="12" md="6" lg="3">
         <v-checkbox
-          v-model="saving"
+          v-model="form.notifyOption"
           @change="change()"
           label="Receive a notification">
         </v-checkbox>
@@ -81,14 +81,14 @@
       v-model="saving"
       hide-overlay
       persistent
-      width="300"
+      height="4rem"
+      width="90%"
     >
       <v-card
-        color="primary"
-        dark
+        color="rgb(0, 45, 87)"
       >
         <v-card-text>
-          Saving your changes.
+          <p class="saving-dialog">Saving your changes.</p>
           <v-progress-linear
             indeterminate
             color="white"
@@ -151,6 +151,12 @@ export default {
 <style>
   .settings-container {
     margin: 2rem 1rem;
+  }
+
+  .saving-dialog {
+    padding: 1rem 0 0 0;
+    font-size: 1rem;
+    color: rgb(216, 216, 216);
   }
 
   h1 {
