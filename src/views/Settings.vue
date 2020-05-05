@@ -1,7 +1,22 @@
 <template>
   <div class="settings-container">
     <v-row justify="center" align="center">
-      <p>Settings</p>
+      <h1>Settings</h1>
+    </v-row>
+    <v-row
+      justify="center"
+      align="center"
+      class="saved-container"
+    >
+      <div class="spacer">
+        <v-progress-circular
+          v-show="saving"
+          indeterminate
+          large
+          label="toets"
+          color="primary"
+        ></v-progress-circular>
+      </div>
     </v-row>
     <v-row justify="center" align="center">
       <v-col cols="12" md="6" lg="3">
@@ -28,7 +43,7 @@
     <v-row justify="center" align="center">
       <v-col cols="12" md="6" lg="3">
         <v-checkbox
-          v-model="form.notifyOption"
+          v-model="saving"
           label="Receive a notification">
         </v-checkbox>
       </v-col>
@@ -53,7 +68,8 @@ export default {
         scheduleOption: '',
         durationOption: 0,
         notifyOption: false
-      }
+      },
+      saving: true
     }
   }
 };
@@ -64,8 +80,13 @@ export default {
     margin: 2rem 1rem;
   }
 
-  p {
+  h1 {
     font-size: 4rem;
+  }
+
+  .spacer { 
+    height: 3rem;
+    margin: 0 50%;
   }
 
   .v-row {
