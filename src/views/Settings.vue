@@ -1,20 +1,31 @@
 <template>
   <div class="settings-container">
     <v-snackbar
+      v-model="saving"
       color="rgb(0, 45, 87)"
       :timeout="snackbar.timeout"
-      top="true"
+      :top=true
       :vertical="snackbar.vertical"
     >
-      Saved!
-      <v-btn
-        dark
-        text
-        @ended="endNotification"
-        @click="endNotification"
+      <v-row
+        justify="center"
+        align="center"
       >
-        Close
-      </v-btn>
+        <h2>Saved!</h2>
+      </v-row>
+      <v-row
+        justify="center"
+        align="center"
+      >
+        <v-btn
+          dark
+          text
+          @ended="endNotification"
+          @click="endNotification"
+        >
+          Close
+        </v-btn>
+      </v-row>
     </v-snackbar>
 
     <v-row justify="center" align="center">
@@ -87,7 +98,7 @@ export default {
         notifyOption: false
       },
       snackbar: {
-        timeourt: 3000,
+        timeourt: 200,
         vertical: true,
       },
       saving: true
@@ -117,5 +128,10 @@ export default {
 
   .v-row {
     padding: 50px 50px; 
+  }
+
+  .v-snackbar {
+    padding: 2rem;
+    height: 3rem;
   }
 </style>
