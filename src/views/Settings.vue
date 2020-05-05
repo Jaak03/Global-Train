@@ -1,5 +1,22 @@
 <template>
   <div class="settings-container">
+    <v-snackbar
+      color="rgb(0, 45, 87)"
+      :timeout="snackbar.timeout"
+      top="true"
+      :vertical="snackbar.vertical"
+    >
+      Saved!
+      <v-btn
+        dark
+        text
+        @ended="endNotification"
+        @click="endNotification"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
+
     <v-row justify="center" align="center">
       <h1>Settings</h1>
     </v-row>
@@ -69,7 +86,16 @@ export default {
         durationOption: 0,
         notifyOption: false
       },
+      snackbar: {
+        timeourt: 3000,
+        vertical: true,
+      },
       saving: true
+    }
+  },
+  methods: {
+    endNotification() {
+      this.saving = !this.saving;
     }
   }
 };
