@@ -1,6 +1,11 @@
 <template>
   <div>
-    <p>Statistics plek</p>
+    <v-row justify="center" align="center">
+
+    </v-row>
+    <v-row justify="center" align="center">
+      
+    </v-row>
   </div>
 </template>
 

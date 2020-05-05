@@ -138,7 +138,7 @@ export default {
         this.changed = false;
         this.saving = false;
         next();
-      }, 3000);
+      }, 1000);
     }
   },
   beforeRouteLeave (to, from , next) {
