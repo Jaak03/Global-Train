@@ -33,5 +33,14 @@ export default new Vuex.Store({
     changeMenuVisibility(state, payload) {
       state.showFab = payload.visibility;
     },
+    customizePageMenu(page) {
+      this.state.menuButtons.forEach((button, i) => {
+        if(page === button.label) {
+          this.state.menuButtons[i].show = false;
+        } else {
+          this.state.menuButtons[i].show = true;
+        }
+      });
+    }
   }
 });

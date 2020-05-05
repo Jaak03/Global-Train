@@ -25,48 +25,17 @@
           </v-btn>
         </template>
         <v-btn
+          v-for="{ label, icon, show } in this.$store.state.menuButtons" 
+          :key="label"
           color="rgb(0, 45, 87)"
           style="color: rgb(216, 216, 216);"
           fab
           dark
           small
-          @click="go('stats')"
+          v-show="show"
+          @click="go(label)"
         >
-          <v-icon>mdi-weight-lifter</v-icon>
-        </v-btn>
-        <v-btn
-          class="menu-fab"
-          style="color: rgb(216, 216, 216);"
-          fab
-          dark
-          small
-          color="rgb(0, 45, 87)"
-          @click="go('settings')"
-        >
-          <v-icon>mdi-cog</v-icon>
-        </v-btn>
-        <v-btn
-          class="menu-fab"
-          style="color: rgb(216, 216, 216);"
-          fab
-          dark
-          small
-          color="rgb(0, 45, 87)"
-          @click="go('home')"
-          v-show="pages.home"
-        >
-          <v-icon>mdi-home</v-icon>
-        </v-btn>
-        <v-btn
-          class="menu-fab"
-          style="color: rgb(216, 216, 216);"
-          fab
-          dark
-          small
-          color="rgb(0, 45, 87)"
-          @click="go('logout')"
-        >
-          <v-icon>mdi-logout</v-icon>
+          <v-icon>{{icon}}</v-icon>
         </v-btn>
       </v-speed-dial>
     </v-fab-transition>
@@ -87,9 +56,6 @@
         bottom: false,
         left: false,
         transition: 'slide-y-reverse-transition',
-        pages: {
-          home: this.$router.history.current.name !== 'home'
-        }
       }
     },
     methods: {
