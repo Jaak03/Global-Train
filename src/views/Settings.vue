@@ -150,7 +150,7 @@ export default {
 
 <style>
   .settings-container {
-    margin: 2rem 1rem;
+    margin: 0rem 1rem;
   }
 
   .saving-dialog {

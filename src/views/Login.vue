@@ -14,6 +14,22 @@
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="toggleShowPassword"
       />
+      <v-text-field
+        label="Password"
+        v-show="register"
+        v-model="loginDetails.password2"
+        :type="showPassword ? 'text' : 'password'"
+        prepend-icon="mdi-lock"
+        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+        @click:append="toggleShowPassword"
+      />
+      <v-text-field
+        label="Email address"
+        v-show="register"
+        v-model="loginDetails.email"
+        type="email"
+        prepend-icon="mdi-mail"
+      />
       <div class="submit-options">
         <button
           class="ma-2 base-button si-button"
@@ -36,12 +52,15 @@ export default {
     return {
       showPassword: false,
       login: false,
+      register: false,
       login_icon: false,
       labelSU: '',
       labelSI: 'Sign in',
       loginDetails: {
         username: '',
-        password: ''
+        password: '',
+        email: '',
+        password2: ''
       }
     }
   },
@@ -58,6 +77,7 @@ export default {
     },
     async clickLogin() {
       event.preventDefault(); 
+      this.toggleRegister('si');
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
@@ -66,7 +86,7 @@ export default {
     },
     clickSignup() {
       event.preventDefault(); 
-      console.log(this.$router);
+      this.toggleRegister('su');
       if(!this.login) this.toggleLogin();
     },
     toggleLogin() {
@@ -76,6 +96,20 @@ export default {
         this.labelSU = this.login ? 'Sign up' : '';
         this.labelSI = this.login ? '' : 'Sign in';
       }, 10); 
+    },
+    toggleRegister(flag = null) {     
+      if(flag) {
+        switch(flag) {
+          case 'si':
+            this.register = false;
+            break;
+          case 'su':
+            this.register = true;
+            break;
+          default:
+            this.register = !this.register;
+        }
+      }
     }
   }
 }
