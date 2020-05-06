@@ -31,8 +31,16 @@ export default {
     font-size: 1rem;
   }
 
+  h1 {
+    font-size: 4rem;
+  }
+
   button:focus {
     outline:0;
+  }
+
+  .v-row {
+    padding: 50px 50px; 
   }
 
   a {

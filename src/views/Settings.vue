@@ -159,17 +159,9 @@ export default {
     color: rgb(216, 216, 216);
   }
 
-  h1 {
-    font-size: 4rem;
-  }
-
   .spacer { 
     height: 3rem;
     margin: 0 50%;
-  }
-
-  .v-row {
-    padding: 50px 50px; 
   }
 
   .v-snackbar {
