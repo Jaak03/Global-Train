@@ -14,7 +14,7 @@ export default new Vuex.Store({
       },
       {
         label: '/statistics',
-        icon: 'mdi-weight-lifter',
+        icon: 'mdi-account',
         show: true,
       },
       {

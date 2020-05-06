@@ -24,11 +24,11 @@ export default {
     transition: width 100ms;
     height: 50px;
     box-shadow: 2px 2px 3px #d6d6d6;
-    font-size: 1.5em;
+    font-size: 1rem;
   }
 
   .v-text-field {
-    font-size: 1.5em;
+    font-size: 1rem;
   }
 
   button:focus {
