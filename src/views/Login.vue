@@ -136,6 +136,10 @@ export default {
     width: 45%;
   }
 
+  .v-spacer {
+    height: 1rem;
+  }
+
   .si-button {
     background-color: rgb(0, 45, 87);
     color: rgb(216, 216, 216);
