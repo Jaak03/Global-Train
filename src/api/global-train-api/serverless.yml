@@ -1,4 +1,6 @@
 service: global-train-api
+app: global-train
+org: devjaak
 
 provider:
   name: aws
@@ -6,38 +8,16 @@ provider:
   profile: devjaak
   stage: ${opt:stage,'dev'}
   region: us-east-1
+  apiKeys:
+    - apiKey0
   environment:
     log: true
     logDate: '2020-05-09'
+    APIKey: ${secrets:apiKey0}
 
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-
-
-# you can add packaging information here
 package:
   include:
     - "../../../node_modules/moment/**"
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
 
 functions:
   test:
