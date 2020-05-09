@@ -13,7 +13,9 @@ if (!MONGO_URI) {
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(MONGO_URI);
+mongoose.connect(MONGO_URI,{
+  useUnifiedTopology: true
+});
 mongoose.connection
   .once('open', () => {
     log('Connected to Mongo Atlas');

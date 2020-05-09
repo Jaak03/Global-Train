@@ -18,19 +18,7 @@ provider:
 
 package:
   include:
-    - "../../../node_modules/moment/**"
-    - "../../../node_modules/mongoose/**"
-    - "../../../node_modules/mongodb/**"
-    - "../../../node_modules/bson/**"
-    - "../../../node_modules/kareem/**"
-    - "../../../node_modules/mongoose-legacy-pluralize/**"
-    - "../../../node_modules/mpath/**"
-    - "../../../node_modules/mquery/**"
-    - "../../../node_modules/ms/**"
-    - "../../../node_modules/regexp-clone/**"
-    - "../../../node_modules/safe-buffer/**"
-    - "../../../node_modules/sliced/**"
-    - "../../../node_modules/sift/**"
+    - "./node_modules/**"
 
 functions:
   test:
