@@ -44,7 +44,7 @@ functions:
     handler: handler.hello
     events:
       - http:
-          path: users/create
+          path: test
           method: get
           cors: true
 

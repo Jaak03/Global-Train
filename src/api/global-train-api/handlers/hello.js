@@ -1,7 +1,6 @@
 const { log } = require('../utils/logger');
 
 module.exports.hello = async (event) => {
-  console.log('Werk die ding?');
   log('Calling hallo function.');
   return {
     statusCode: 200,
