@@ -30,8 +30,9 @@ provider:
 
 
 # you can add packaging information here
-#package:
-#  include:
+package:
+  include:
+    - "../../../node_modules/moment/**"
 #    - include-me.js
 #    - include-me-dir/**
 #  exclude:
