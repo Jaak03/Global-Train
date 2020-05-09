@@ -23,7 +23,9 @@ service: global-train-api
 provider:
   name: aws
   runtime: nodejs12.x
-
+  environment:
+    log: true
+    logDate: '2020-05-09'
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
@@ -45,9 +47,7 @@ provider:
 #            - "/*"
 
 # you can define service wide environment variables here
-environment:
-  log: true
-  log-date: 2020-05-07
+
 
 # you can add packaging information here
 #package:

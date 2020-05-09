@@ -16,7 +16,8 @@ function isRecent() {
  * @param {string} message 
  */
 function log(message) {
-  if(isRecent()) console.log(message);
+  if(process.env.IS_LOCAL === 'true') console.log(message)
+  else if(isRecent()) console.log(message);
 }
 
 module.exports = {

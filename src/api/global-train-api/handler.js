@@ -1,6 +1,6 @@
 'use strict';
-const hello = require('./handlers/hello')
+const { hello } = require('./handlers/hello')
 
 module.exports = {
-  hello,
+  hello
 };
