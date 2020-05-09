@@ -11,6 +11,15 @@ function isRecent() {
     && process.env.log === 'true';
 }
 
+/**
+ * Logs the message to the console if isRecent().
+ * @param {string} message 
+ */
+function log(message) {
+  if(isRecent()) console.log(message);
+}
+
 module.exports = {
   isRecent,
+  log
 };
