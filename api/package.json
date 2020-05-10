@@ -4,12 +4,13 @@
   "description": "List of lambda functions to serve as the API for the Global Train API.",
   "main": "config.js",
   "dependencies": {
+    "chai": "^4.2.0",
     "moment": "^2.25.3",
     "mongoose": "^5.9.13"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/",
     "hallo:local": ""
   },
   "keywords": [

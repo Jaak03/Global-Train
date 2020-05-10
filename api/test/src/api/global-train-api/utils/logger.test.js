@@ -4,7 +4,7 @@ const moment = require('moment');
 
 const {
   isRecent,
-} = require('../../../../../src/api/global-train-api/utils/logger');
+} = require('../../../../../utils/logger');
 
 describe('logger', () => {
   describe('isRecent', () => {
