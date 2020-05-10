@@ -19,6 +19,7 @@ provider:
 package:
   include:
     - "./node_modules/**"
+    - ".env/**"
 
 functions:
   test:
