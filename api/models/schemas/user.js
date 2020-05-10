@@ -8,8 +8,6 @@ const UserSchema = new mongoose.Schema({
   gender: String,
 });
 
-exports.UserModel = mongoose.model(
-  'User',
-  UserSchema,
-  'User'
-);
+module.exports = {
+  UserSchema
+};

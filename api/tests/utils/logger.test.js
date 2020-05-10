@@ -3,8 +3,10 @@ const { expect } = require('chai');
 const moment = require('moment');
 
 const {
-  isRecent,
-} = require('../../../../../utils/logger');
+  utils: {
+    isRecent
+  },
+} = require('../env');
 
 describe('logger', () => {
   describe('isRecent', () => {
