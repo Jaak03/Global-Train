@@ -4,7 +4,7 @@ const { UserSchema } = require('../models/schemas/user');
 const UserModel = require('mongoose').model('User', UserSchema);
 
 async function register(event) {
-  log(event);
+  return UserModel.insertMany(event);
 }
 
 module.exports = {
