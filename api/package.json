@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "0.1.0",
+  "description": "List of lambda functions to serve as the API for the Global Train API.",
+  "main": "config.js",
+  "dependencies": {
+    "moment": "^2.25.3",
+    "mongoose": "^5.9.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lambda"
+  ],
+  "author": "jaak",
+  "license": "ISC"
+}
