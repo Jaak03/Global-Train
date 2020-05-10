@@ -22,12 +22,22 @@ package:
     - ".env/**"
 
 functions:
+
   test:
     handler: handler.hello
     events:
       - http:
           path: test
           method: get
+          cors: true
+          private: true
+
+  register:
+    handler: handler.register
+    events:
+      - http:
+          path: user/register
+          method: post
           cors: true
           private: true
 
