@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "List of lambda functions to serve as the API for the Global Train API.",
   "main": "config.js",
   "dependencies": {
