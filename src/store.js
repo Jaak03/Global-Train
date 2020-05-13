@@ -1,5 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+
+import { API_KEY, API_URL } from '../.env/dev';
 
 Vue.use(Vuex)
 
@@ -27,7 +29,11 @@ export default new Vuex.Store({
         icon: 'mdi-logout',
         show: true,
       }
-    ]
+    ],
+    api: {
+      API_URL,
+      API_KEY
+    }
   },
   mutations: {
     changeMenuVisibility(state, payload) {

@@ -72,8 +72,31 @@ export default {
       this.showPassword = !this.showPassword;
     },
     async loginWithDetails() {
-      console.log(this.loginDetails);
-      return true;
+      const url = this.$store.state.api.API_URL;
+
+      // Setup request options
+      let options = { 
+        method: 'POST', 
+        body: {
+          email: this.loginDetails.email,
+          password: this.loginDetails.password
+        },
+        headers: new Headers({
+          'X-Api-Key': this.$store.state.api.API_KEY,
+          'Content-Type': 'application/json',
+        })
+      }
+
+      console.log({
+        url: `${url}/user/login`,
+        options,
+      });
+      
+      const loginRequest = await fetch(`${url}user/login`, options);
+
+      loginRequest.json().then(res => console.log(res));
+
+      return loginRequest.token !== undefined;
     },
     async clickLogin() {
       event.preventDefault(); 
