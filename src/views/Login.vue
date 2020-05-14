@@ -6,6 +6,7 @@
         v-model="loginDetails.email"
         type="email"
         prepend-icon="mdi-mail"
+        value="jaak@gmail.com"
       />
       <v-text-field
         label="Password"
@@ -14,6 +15,7 @@
         prepend-icon="mdi-lock"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="toggleShowPassword"
+        value="1234567"
       />
       <v-text-field
         label="Password"
@@ -23,6 +25,7 @@
         prepend-icon="mdi-lock"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="toggleShowPassword"
+        value="1234567"
       />
       <div class="submit-options">
         <button
@@ -77,12 +80,10 @@ export default {
     },
     async loginWithDetails() {
       const url = this.$store.state.api.API_URL;
-
       const options = this.generateRequest({
           email: this.loginDetails.username,
           password: this.loginDetails.password
         });
-
 
       console.log({
         url: `${url}/user/login`,
@@ -94,6 +95,22 @@ export default {
       loginRequest.json().then(res => console.log(res));
 
       return loginRequest.token !== undefined;
+    },
+    async registerUser() {
+      if (this.loginDetails.password !== this.loginDetails.password2) {
+        console.log('Passwords do not match.');
+      }
+
+      const url = this.$store.state.api.API_URL;
+      const options = this.generateRequest({
+        email: this.loginDetails.email,
+        password: this.loginDetails.password,
+        gender: 1,
+        age: 12,
+      });
+
+      const registerRequest = await fetch(`${url}user/register`, options);
+      registerRequest.json().then(result => console.log(result));
     },
     async clickLogin() {
       event.preventDefault(); 
@@ -124,7 +141,11 @@ export default {
             this.register = false;
             break;
           case 'su':
-            this.register = true;
+            if (this.register) {
+              this.registerUser();
+            } else {
+              this.register = true;
+            }
             break;
           default:
             this.register = !this.register;
