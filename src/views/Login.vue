@@ -2,9 +2,10 @@
   <div class="login-container">
     <v-form>
       <v-text-field
-        label="Username"
-        v-model="loginDetails.username"
-        prepend-icon="mdi-account-circle"
+        label="Email address"
+        v-model="loginDetails.email"
+        type="email"
+        prepend-icon="mdi-mail"
       />
       <v-text-field
         label="Password"
@@ -22,13 +23,6 @@
         prepend-icon="mdi-lock"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="toggleShowPassword"
-      />
-      <v-text-field
-        label="Email address"
-        v-show="register"
-        v-model="loginDetails.email"
-        type="email"
-        prepend-icon="mdi-mail"
       />
       <div class="submit-options">
         <button
@@ -57,7 +51,6 @@ export default {
       labelSU: '',
       labelSI: 'Sign in',
       loginDetails: {
-        username: '',
         password: '',
         email: '',
         password2: ''
@@ -68,24 +61,28 @@ export default {
     this.$store.commit('changeMenuVisibility', { visibility: false });
   },
   methods: {
+    generateRequest(body) {
+      // Setup request options
+      return { 
+        method: 'POST', 
+        body,
+        headers: new Headers({
+          'X-Api-Key': this.$store.state.api.API_KEY,
+          'Content-Type': 'application/json',
+        })
+      }
+    },
     toggleShowPassword() {
       this.showPassword = !this.showPassword;
     },
     async loginWithDetails() {
       const url = this.$store.state.api.API_URL;
 
-      // Setup request options
-      let options = { 
-        method: 'POST', 
-        body: {
-          email: this.loginDetails.email,
+      const options = this.generateRequest({
+          email: this.loginDetails.username,
           password: this.loginDetails.password
-        },
-        headers: new Headers({
-          'X-Api-Key': this.$store.state.api.API_KEY,
-          'Content-Type': 'application/json',
-        })
-      }
+        });
+
 
       console.log({
         url: `${url}/user/login`,
