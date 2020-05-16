@@ -52,7 +52,6 @@ function parseJwt (token) {
 }
 
 router.beforeEach((to, from, next) => {
-  console.log(`Going to ${JSON.stringify(to)}.`);
   try {
     const token = localStorage.getItem('token');
     if (token) {

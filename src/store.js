@@ -33,7 +33,11 @@ export default new Vuex.Store({
     api: {
       API_URL,
       API_KEY
-    }
+    },
+    message: {
+      content: '',
+      show: false,
+    },
   },
   mutations: {
     changeMenuVisibility(state, payload) {
@@ -49,6 +53,10 @@ export default new Vuex.Store({
           state.menuButtons[i].show = true;
         }
       });
+    },
+    showMessage(state, payload) {
+      state.message.content = payload.msg;
+      state.message.show = true;
     }
   }
 });

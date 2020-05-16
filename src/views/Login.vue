@@ -56,7 +56,7 @@ export default {
         password: '1234567',
         email: 'jaak@gmail.com',
         password2: '1234567'
-      }
+      },
     }
   },
   mounted() {
@@ -81,7 +81,7 @@ export default {
       const loginRequest = await fetch(`${url}user/login`, options);
 
       return loginRequest.json().then(res => {
-        console.log(res.msg);
+        this.$store.commit('showMessage', { msg: res.msg });
 
         if (res.token) {
           localStorage.setItem('token', res.token);

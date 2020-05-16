@@ -1,5 +1,18 @@
 <template>
   <div class="base-container">
+    <v-snackbar
+      v-model="$store.state.message.show"
+      timeout="6000"
+    >
+      {{ $store.state.message.content }}
+      <v-btn
+        color="pink"
+        text
+        @click="$store.state.message.show = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
     <div class="router-link">
       <router-view/>
     </div>
