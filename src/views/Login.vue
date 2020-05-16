@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { generateRequest } from '../helpers/http';
+
 export default {
   data() {
     return {
@@ -64,26 +66,15 @@ export default {
     this.$store.commit('changeMenuVisibility', { visibility: false });
   },
   methods: {
-    generateRequest(body) {
-      // Setup request options
-      return { 
-        method: 'POST', 
-        body,
-        headers: new Headers({
-          'X-Api-Key': this.$store.state.api.API_KEY,
-          'Content-Type': 'application/json',
-        })
-      }
-    },
     toggleShowPassword() {
       this.showPassword = !this.showPassword;
     },
     async loginWithDetails() {
       const url = this.$store.state.api.API_URL;
-      const options = this.generateRequest({
-          email: this.loginDetails.username,
+      const options = generateRequest({
+          email: this.loginDetails.email,
           password: this.loginDetails.password
-        });
+        }, this);
 
       console.log({
         url: `${url}/user/login`,
@@ -102,12 +93,14 @@ export default {
       }
 
       const url = this.$store.state.api.API_URL;
-      const options = this.generateRequest({
+      const options = generateRequest({
         email: this.loginDetails.email,
         password: this.loginDetails.password,
         gender: 1,
         age: 12,
-      });
+      }, this);
+
+      console.log(options);
 
       const registerRequest = await fetch(`${url}user/register`, options);
       registerRequest.json().then(result => console.log(result));
