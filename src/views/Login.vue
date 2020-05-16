@@ -6,7 +6,6 @@
         v-model="loginDetails.email"
         type="email"
         prepend-icon="mdi-mail"
-        value="jaak@gmail.com"
       />
       <v-text-field
         label="Password"
@@ -15,7 +14,6 @@
         prepend-icon="mdi-lock"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="toggleShowPassword"
-        value="1234567"
       />
       <v-text-field
         label="Password"
@@ -25,7 +23,6 @@
         prepend-icon="mdi-lock"
         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
         @click:append="toggleShowPassword"
-        value="1234567"
       />
       <div class="submit-options">
         <button
@@ -56,9 +53,9 @@ export default {
       labelSU: '',
       labelSI: 'Sign in',
       loginDetails: {
-        password: '',
-        email: '',
-        password2: ''
+        password: '1234567',
+        email: 'jaak@gmail.com',
+        password2: '1234567'
       }
     }
   },
@@ -83,9 +80,16 @@ export default {
       
       const loginRequest = await fetch(`${url}user/login`, options);
 
-      loginRequest.json().then(res => console.log(res));
+      return loginRequest.json().then(res => {
+        console.log(res.msg);
 
-      return loginRequest.token !== undefined;
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          return true;
+        } else {
+          return false;
+        }
+      });
     },
     async registerUser() {
       if (this.loginDetails.password !== this.loginDetails.password2) {
@@ -111,6 +115,7 @@ export default {
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
+        console.log(loggedIn);
         if(loggedIn) this.$router.push('/home');
       }
     },
