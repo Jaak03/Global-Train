@@ -93,7 +93,7 @@ export default {
     },
     async registerUser() {
       if (this.loginDetails.password !== this.loginDetails.password2) {
-        console.log('Passwords do not match.');
+        this.$store.commit('showMessage', { msg: 'Passwords do not match.'});
       }
 
       const url = this.$store.state.api.API_URL;
@@ -107,7 +107,9 @@ export default {
       console.log(options);
 
       const registerRequest = await fetch(`${url}user/register`, options);
-      registerRequest.json().then(result => console.log(result));
+      registerRequest.json().then(result => {
+        this.$store.commit('showMessage', { msg: result.msg});
+      });
     },
     async clickLogin() {
       event.preventDefault(); 

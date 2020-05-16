@@ -1,12 +1,13 @@
 <template>
   <div class="base-container">
     <v-snackbar
+      top
       v-model="$store.state.message.show"
       timeout="6000"
     >
       {{ $store.state.message.content }}
       <v-btn
-        color="pink"
+        color="rgb(216, 216, 216)"
         text
         @click="$store.state.message.show = false"
       >
