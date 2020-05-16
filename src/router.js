@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import Vue from 'vue';
 import Router from 'vue-router';
 
+const moment = require('moment');
+
 Vue.use(Router);
 
-export const router = new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -49,18 +52,22 @@ function parseJwt (token) {
 }
 
 router.beforeEach((to, from, next) => {
-  // if (authRequired && !loggedIn) {
-  //   return next('/login');
-  // }
   try {
     const token = localStorage.getItem('token');
     if (token) {
-      console.log(parseJwt(token));
+      const { exp, sub } = parseJwt(token);
+      if (
+        moment(exp * 1000).isAfter(moment()) 
+          && sub === 'Global-Train'
+      ) {
+        next();
+      }
     }
+    next('/');
   } catch (error) {
-    console.log(error.stack);
-    return {};
+    console.error(error.stack);
+    next('/login');
   }
-
-  next();
 });
+
+export default router;
