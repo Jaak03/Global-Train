@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-Vue.use(Router)
+Vue.use(Router);
 
-export default new Router({
+export const router = new Router({
   routes: [
     {
       path: '/',
@@ -36,4 +36,31 @@ export default new Router({
       component: () => import('./views/Base.vue')
     },
   ]
-})
+});
+
+function parseJwt (token) {
+  var base64Url = token.split('.')[1];
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+
+  return JSON.parse(jsonPayload);
+}
+
+router.beforeEach((to, from, next) => {
+  // if (authRequired && !loggedIn) {
+  //   return next('/login');
+  // }
+  try {
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log(parseJwt(token));
+    }
+  } catch (error) {
+    console.log(error.stack);
+    return {};
+  }
+
+  next();
+});
