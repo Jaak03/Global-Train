@@ -63,10 +63,11 @@ router.beforeEach((to, from, next) => {
         next();
       }
     }
-    next('/');
+    if (to.name !== 'login') next({ name: 'login' })
+    else next();
   } catch (error) {
     console.error(error.stack);
-    next('/login');
+    if (to.name !== 'login') next({ name: 'login' });
   }
 });
 
