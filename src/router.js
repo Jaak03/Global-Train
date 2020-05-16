@@ -52,6 +52,7 @@ function parseJwt (token) {
 }
 
 router.beforeEach((to, from, next) => {
+  console.log(`Going to ${JSON.stringify(to)}.`);
   try {
     const token = localStorage.getItem('token');
     if (token) {
@@ -61,10 +62,11 @@ router.beforeEach((to, from, next) => {
           && sub === 'Global-Train'
       ) {
         next();
-      }
+      } else next({ name: 'login' })
+    } else {
+      if (to.name !== 'login') next({ name: 'login' })
+      else next();
     }
-    if (to.name !== 'login') next({ name: 'login' })
-    else next();
   } catch (error) {
     console.error(error.stack);
     if (to.name !== 'login') next({ name: 'login' });
