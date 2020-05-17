@@ -81,11 +81,11 @@ export default {
       const loginRequest = await fetch(`${url}user/login`, options);
 
       return loginRequest.json().then(res => {
-        this.$store.commit('showMessage', { msg: res.msg });
+        localStorage.setItem('settings', JSON.stringify(res.user.settings));
 
         if (res.token) {
           localStorage.setItem('token', res.token);
-          return true;
+          return res;
         } else {
           return false;
         }
@@ -104,11 +104,10 @@ export default {
         age: 12,
       }, this);
 
-      console.log(options);
-
       const registerRequest = await fetch(`${url}user/register`, options);
       registerRequest.json().then(result => {
         console.log(result);
+
         if (result.msg === 'Successfully registered new user.') {
           this.$store.commit('showMessage', { msg: result.msg });
           this.loginDetails.password2 = '';
@@ -123,7 +122,16 @@ export default {
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
-        if(loggedIn) this.$router.push('/home');
+        console.log(localStorage.getItem('settings'));
+        if(loggedIn) {
+          if(localStorage.getItem('settings')) {
+            this.$store.commit('showMessage', { msg: `${loggedIn.msg} Please commit to some session times.` });
+            this.$router.push('/settings');
+          } else {
+            this.$store.commit('showMessage', { msg: loggedIn.msg });
+            this.$router.push('/home');
+          }
+        }
       }
     },
     clickSignup() {

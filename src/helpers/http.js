@@ -6,6 +6,7 @@ function generateRequest(body, window) {
     headers: new Headers({
       'X-Api-Key': window.$store.state.api.API_KEY,
       'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('token'),
     })
   };
 }

@@ -102,6 +102,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.commit('changeMenuVisibility', { visibility: true });
+  },
   data() {
     return {
       session: {
