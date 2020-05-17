@@ -37,44 +37,27 @@
       class="saved-container"
     >
       <div class="spacer">
-        <!-- <v-progress-circular
-          v-show="saving"
-          indeterminate
-          large
-          color="primary"
-        ></v-progress-circular> -->
       </div>
     </v-row>
-    <v-row justify="center" align="center">
-      <v-col cols="12" md="6" lg="3">
-        <v-select
-          v-model="form.scheduleOption"
-          :items="session.schedule"
-          color="pink"
-          label="Sessions"
-          @change="change()"
-        ></v-select>
-      </v-col>
-    </v-row>
-    <v-row justify="center" align="center">
-      <v-col cols="12" md="6" lg="3">
-        <v-select
-          v-model="form.durationOption"
-          :items="session.duration"
-          color="pink"
-          label="Duration"
-          @change="change()"
-        ></v-select>
-      </v-col>
-    </v-row>
-    <v-row justify="center" align="center">
-      <v-col cols="12" md="6" lg="3">
-        <v-checkbox
-          v-model="form.notifyOption"
-          @change="change()"
-          label="Receive a notification">
-        </v-checkbox>
-      </v-col>
+   
+   <v-row
+      justify="center"
+      align="center"
+   >
+     <p>Please commit to one or more of the available sessions.</p>
+   </v-row>
+   <v-row
+      v-for="item in session.schedule" :key="item"
+      justify="center"
+      align="center"
+    >
+      <v-checkbox
+        value
+        :label="item"
+        @change="change()"
+      >
+        {{ item }}
+      </v-checkbox>
     </v-row>
 
     <v-dialog
@@ -143,6 +126,9 @@ export default {
         next();
       }, 1000);
     }
+  },
+  checkSession() {
+
   },
   beforeRouteLeave (to, from , next) {
     if(this.changed) this.save(next);
