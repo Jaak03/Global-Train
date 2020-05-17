@@ -1,33 +1,5 @@
 <template>
   <div class="settings-container">
-    <!-- <v-snackbar
-      v-model="saving"
-      color="rgb(0, 45, 87)"
-      :timeout="snackbar.timeout"
-      :top=true
-      :vertical="snackbar.vertical"
-    >
-      <v-row
-        justify="center"
-        align="center"
-      >
-        <h2>Saved!</h2>
-      </v-row>
-      <v-row
-        justify="center"
-        align="center"
-      >
-        <v-btn
-          dark
-          text
-          @ended="endNotification"
-          @click="endNotification"
-        >
-          Close
-        </v-btn>
-      </v-row>
-    </v-snackbar> -->
-
     <v-row justify="center" align="center">
       <h1>Settings</h1>
     </v-row>
@@ -52,9 +24,10 @@
       align="center"
     >
       <v-checkbox
+        v-model="form.scheduleOption[item]"
         value
         :label="item"
-        @change="change()"
+        @change="checkSession($event, item)"
       >
         {{ item }}
       </v-checkbox>
@@ -84,9 +57,16 @@
 </template>
 
 <script>
+import { generateRequest } from '../helpers/http';
+
 export default {
   mounted() {
     this.$store.commit('changeMenuVisibility', { visibility: true });
+    const settings = localStorage.getItem('settings') || [];
+    this.session.schedule.forEach((schedule) => {
+      this.form.scheduleOption[schedule] = settings.includes(schedule);
+    });
+    console.log(this.form.scheduleOption);
   },
   data() {
     return {
@@ -100,9 +80,7 @@ export default {
         duration: [5,10,15,20]
       },
       form: {
-        scheduleOption: '',
-        durationOption: 0,
-        notifyOption: false
+        scheduleOption: [],
       },
       snackbar: {
         timeourt: 200,
@@ -117,18 +95,44 @@ export default {
     change() {
       this.changed = true;
     },
+    getSessionList() {
+      const list = [];
+      this.session.schedule.forEach((session) => {
+        if (this.form.scheduleOption[session]) {
+          list.push(session);
+        }
+      });
+
+      return list;
+    },
     async save(next) {
       this.saving = true;
-      setTimeout(() => {
-        console.log(this.form);
+      const url = this.$store.state.api.API_URL;
+      const options = generateRequest({
+          settings: this.getSessionList(),
+        }, this);
+      
+      try {
+        const settingsUpdate = await fetch(`${url}user/settings`, options);
+        const response = await settingsUpdate.json();
+  
         this.changed = false;
         this.saving = false;
+  
+        console.log(response);
+        localStorage.setItem('settings', this.getSessionList());
+        this.$store.commit('showMessage', { msg: response.msg });
         next();
-      }, 1000);
-    }
-  },
-  checkSession() {
-
+      } catch (e) {
+        this.$store.commit('showMessage', { msg: 'Could not update user settings.' });
+        next();
+      }
+    },
+    checkSession(event, name) {
+      this.change();
+      if(event) this.form.scheduleOption[name] = true;
+      else this.form.scheduleOption[name] = false;
+    },
   },
   beforeRouteLeave (to, from , next) {
     if(this.changed) this.save(next);

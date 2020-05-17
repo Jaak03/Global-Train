@@ -112,6 +112,8 @@ export default {
           this.loginDetails.password2 = '';
           this.toggleRegister('si');
           this.toggleLogin();
+        } else {
+          this.$store.commit('showMessage', { msg: result.msg });
         }
       });
     },
