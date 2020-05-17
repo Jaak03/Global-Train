@@ -67,24 +67,30 @@ export default {
       this.showPassword = !this.showPassword;
     },
     async loginWithDetails() {
-      const url = this.$store.state.api.API_URL;
-      const options = generateRequest({
-          email: this.loginDetails.email,
-          password: this.loginDetails.password
-        }, this);
-      
-      const loginRequest = await fetch(`${url}user/login`, options);
-
-      return loginRequest.json().then(res => {
-        localStorage.setItem('settings', JSON.stringify(res.user.settings));
-
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          return res;
-        } else {
-          return false;
-        }
-      });
+      try {
+        const url = this.$store.state.api.API_URL;
+        const options = generateRequest({
+            email: this.loginDetails.email,
+            password: this.loginDetails.password
+          }, this);
+        
+        const loginRequest = await fetch(`${url}user/login`, options);
+  
+        return loginRequest.json().then(res => {
+          if (res.user) {
+            localStorage.setItem('settings', JSON.stringify(res.user.settings));
+          }
+  
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+            return res;
+          } else {
+            return { msg: res.msg || 'The login request failed.' };
+          }
+        });
+      } catch (e) {
+        return { msg: 'The login request failed.' }
+      }
     },
     async registerUser() {
       if (this.loginDetails.password !== this.loginDetails.password2) {
@@ -115,8 +121,11 @@ export default {
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
+        const settings = localStorage.getItem('settings');
+        const token = localStorage.getItem('token');
         if(loggedIn) {
-          if(localStorage.getItem('settings')) {
+          if(settings && token) {
+            console.log({ settings, token });
             this.$store.commit('showMessage', { msg: `${loggedIn.msg} Please commit to some session times.` });
             this.$router.push('/settings');
           } else {
@@ -124,7 +133,7 @@ export default {
             this.$router.push('/home');
           }
         } else {
-            this.$store.commit('showMessage', { msg: loggedIn.msg || 'The login request failed.' });
+            this.$store.commit('showMessage', { msg: loggedIn.msg });
         }
       }
     },
