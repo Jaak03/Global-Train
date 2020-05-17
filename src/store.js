@@ -37,6 +37,7 @@ export default new Vuex.Store({
     message: {
       content: '',
       show: false,
+      timeout: 6000
     },
   },
   mutations: {

@@ -25,7 +25,7 @@ const router = new Router({
     },
     {
       path: '/settings',
-      name: 'home',
+      name: 'settings',
       component: () => import('./views/Settings.vue')
     },
     {

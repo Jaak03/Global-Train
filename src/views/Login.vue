@@ -108,7 +108,13 @@ export default {
 
       const registerRequest = await fetch(`${url}user/register`, options);
       registerRequest.json().then(result => {
-        this.$store.commit('showMessage', { msg: result.msg});
+        console.log(result);
+        if (result.msg === 'Successfully registered new user.') {
+          this.$store.commit('showMessage', { msg: result.msg });
+          this.loginDetails.password2 = '';
+          this.toggleRegister('si');
+          this.toggleLogin();
+        }
       });
     },
     async clickLogin() {
@@ -117,7 +123,6 @@ export default {
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
-        console.log(loggedIn);
         if(loggedIn) this.$router.push('/home');
       }
     },

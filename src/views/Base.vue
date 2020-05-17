@@ -3,7 +3,7 @@
     <v-snackbar
       top
       v-model="$store.state.message.show"
-      timeout="6000"
+      :timeout="$store.state.message.timeout"
     >
       {{ $store.state.message.content }}
       <v-btn
