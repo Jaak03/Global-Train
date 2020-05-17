@@ -72,11 +72,6 @@ export default {
           email: this.loginDetails.email,
           password: this.loginDetails.password
         }, this);
-
-      console.log({
-        url: `${url}/user/login`,
-        options,
-      });
       
       const loginRequest = await fetch(`${url}user/login`, options);
 
@@ -106,8 +101,6 @@ export default {
 
       const registerRequest = await fetch(`${url}user/register`, options);
       registerRequest.json().then(result => {
-        console.log(result);
-
         if (result.msg === 'Successfully registered new user.') {
           this.$store.commit('showMessage', { msg: result.msg });
           this.loginDetails.password2 = '';
@@ -122,7 +115,6 @@ export default {
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
-        console.log(localStorage.getItem('settings'));
         if(loggedIn) {
           if(localStorage.getItem('settings')) {
             this.$store.commit('showMessage', { msg: `${loggedIn.msg} Please commit to some session times.` });
@@ -131,6 +123,8 @@ export default {
             this.$store.commit('showMessage', { msg: loggedIn.msg });
             this.$router.push('/home');
           }
+        } else {
+            this.$store.commit('showMessage', { msg: loggedIn.msg || 'The login request failed.' });
         }
       }
     },

@@ -60,15 +60,18 @@ router.beforeEach((to, from, next) => {
         moment(exp * 1000).isAfter(moment()) 
           && sub === 'Global-Train'
       ) {
-          next();
-      } else next({ name: 'login' })
+          console.log(to);
+          return next();
+      } else if (to.name !== 'login') return next({ name: 'login' })
+      else return next();
     } else {
-      if (to.name !== 'login') next({ name: 'login' })
-      else next();
+      if (to.name !== 'login') return next({ name: 'login' });
+      else return next();
     }
   } catch (error) {
     console.error(error.stack);
-    if (to.name !== 'login') next({ name: 'login' });
+    if (to.name !== 'login') return next({ name: 'login' })
+    else return next();
   }
 });
 

@@ -64,16 +64,16 @@
         switch(action) {
           case '/logout':
               if(localStorage.token) localStorage.removeItem('token');
-              this.$router.replace('/');
+              this.$router.push('/login');
               break;
           case '/home':
-            this.$router.replace('/home');
+            this.$router.push('/home');
             break;
           case '/settings':
-            this.$router.replace('/settings');
+            this.$router.push('/settings');
             break;
           case '/statistics':
-            this.$router.replace('/statistics');
+            this.$router.push('/statistics');
             break;
         }
       },

@@ -26,8 +26,8 @@
   export default {
     name: 'Base',
     mounted() {
-      console.log('No token found');
       if(!localStorage.token) this.$router.push('/login');
+      else this.$router.push('/home');
     },
     components: {
       Menu,
