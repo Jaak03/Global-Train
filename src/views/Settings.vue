@@ -25,7 +25,6 @@
     >
       <v-checkbox
         v-model="form.scheduleOption[item]"
-        value
         :label="item"
         @change="checkSession($event, item)"
       >
@@ -62,11 +61,7 @@ import { generateRequest } from '../helpers/http';
 export default {
   mounted() {
     this.$store.commit('changeMenuVisibility', { visibility: true });
-    const settings = localStorage.getItem('settings') || [];
-    this.session.schedule.forEach((schedule) => {
-      this.form.scheduleOption[schedule] = settings.includes(schedule);
-    });
-    console.log(this.form.scheduleOption);
+    this.init();
   },
   data() {
     return {
@@ -94,6 +89,10 @@ export default {
   methods: {
     change() {
       this.changed = true;
+      const settings = localStorage.getItem('settings') || [];
+      this.session.schedule.forEach((schedule) => {
+        this.form.scheduleOption[schedule] = settings.includes(schedule);
+      });
     },
     getSessionList() {
       const list = [];
@@ -130,8 +129,7 @@ export default {
     },
     checkSession(event, name) {
       this.change();
-      if(event) this.form.scheduleOption[name] = true;
-      else this.form.scheduleOption[name] = false;
+      console.log({ event, name, opt: this.form.scheduleOption });
     },
   },
   beforeRouteLeave (to, from , next) {
