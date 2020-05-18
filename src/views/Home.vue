@@ -14,6 +14,10 @@ export default {
   },
   components: {
     Timer,
+  },
+  data() {
+    return {
+    }
   }
 }
 </script>
