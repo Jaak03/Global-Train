@@ -10,29 +10,73 @@ export default {
   mounted() {
     let times = localStorage.getItem('settings').split(',');
     
-    times = times.map((time) => moment().format(`YYYY-MM-DDT${time}:00`))
+    this.times = times.map((time) => moment().format(`YYYY-MM-DDT${time}:00`))
       .sort((a, b) => moment(a) - moment(b));
-    
-    let i = 0;
-    let time;
-    while(moment(times[i]).isBefore(moment()) && i < times.length) {
-      time = moment(times[i]);
-      i += 1;
-    }
+
+    this.next = this.times[0];
+
+    this.defineNext();
+
+    console.log(moment(this.next).toISOString());
+
+    const time = this.next;
+
     const current = moment();
-    console.log({ current, time, diff: current - time });
-    this.time = current - time;
+    this.time = time - current;
+
+    this.start();
   },
   data() {
     return {
       time: moment(),
-      timeString: ''
+      timeString: '',
+      next: 0,
+      times: [],
+      countingDown: true,
+      // sound: new Audio("http://s1download-universal-soundbank.com/wav/nudge.wav"),
+      i: 0
     }
   },
   watch: {
     time: function() {
       this.timeString = moment(this.time).format('HH:mm:ss');
     }
+  },
+  methods: {
+    defineNext() {
+      while(moment(this.next).isBefore(moment())) {
+        this.i += 1;
+        if(this.i % this.times.length === 0)
+          this.next = moment(this.times[0]).clone().add(1, 'day');
+      }
+    },
+    tick() {
+      const current = moment();
+
+      if (moment(this.next).isAfter(current)) this.defineNext();
+
+      this.time = this.next - current;
+
+      if (this.time > 0) {
+        this.time--;
+      } else {
+        clearInterval(this.timer);
+        // this.sound.play();
+      }
+    },
+    stop () {
+      this.countingDown = false
+      clearInterval(this.timer)
+      this.timer = null
+    },
+    start () {
+      this.countingDown = true
+      if (!this.timer) {
+        this.timer = setInterval( () => {
+          this.tick();
+        }, 1000 )
+      }
+    },
   }
 }
 </script>
