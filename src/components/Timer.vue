@@ -10,16 +10,15 @@ export default {
   mounted() {
     let times = localStorage.getItem('settings').split(',');
     
-    this.times = times.map((time) => moment().format(`YYYY-MM-DDT${time}:00`))
+    this.times = times.map((time) => moment().utc().format(`YYYY-MM-DDT${time}:00`))
       .sort((a, b) => moment(a) - moment(b));
 
     this.next = this.times[0];
+    this.next = moment().format('YYYY-MM-DDT19:53:00');
 
     this.defineNext();
 
-    console.log(moment(this.next).toISOString());
-
-    const time = this.next;
+    const time = moment(this.next);
 
     const current = moment();
     this.time = time - current;
@@ -33,13 +32,14 @@ export default {
       next: 0,
       times: [],
       countingDown: true,
+      workingOut: false,
       // sound: new Audio("http://s1download-universal-soundbank.com/wav/nudge.wav"),
       i: 0
     }
   },
   watch: {
     time: function() {
-      this.timeString = moment(this.time).format('HH:mm:ss');
+      this.timeString = moment(this.time).utc().format('HH:mm:ss');
     }
   },
   methods: {
@@ -53,15 +53,13 @@ export default {
     tick() {
       const current = moment();
 
-      if (moment(this.next).isAfter(current)) this.defineNext();
-
-      this.time = this.next - current;
-
-      if (this.time > 0) {
-        this.time--;
-      } else {
-        clearInterval(this.timer);
-        // this.sound.play();
+      this.time = moment(this.next) - moment(current);
+      if (this.time < 1000 && !this.workingOut) {
+        this.next = moment().utc().add(5, 'minute');
+        this.workingOut = true;
+      } else if (this.time < 1000 && this.workingOut) {
+        this.defineNext();
+        this.workingOut = false;
       }
     },
     stop () {
