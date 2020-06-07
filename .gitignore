@@ -8,3 +8,6 @@ package-lock.json
 
 # Secrets
 **/.env/**
+
+# Compiled files
+dist/

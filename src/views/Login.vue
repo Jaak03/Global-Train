@@ -53,9 +53,9 @@ export default {
       labelSU: '',
       labelSI: 'Sign in',
       loginDetails: {
-        password: '1234567',
-        email: 'jaak@gmail.com',
-        password2: '1234567'
+        password: '',
+        email: '',
+        password2: ''
       },
     }
   },
@@ -123,11 +123,16 @@ export default {
       if (this.login) this.toggleLogin();
       else {
         const loggedIn = await this.loginWithDetails();
-        const settings = localStorage.getItem('settings');
+
+        // Check whether the user chose any session times.
+        let settings = localStorage.getItem('settings');
+        console.log(settings);
+        settings = (JSON.parse(settings)).filter(({ active }) => !active);
+        console.log(settings);
+
         const token = localStorage.getItem('token');
         if(loggedIn) {
-          if(settings && token) {
-            console.log({ settings, token });
+          if((settings || []).length > 0 && token) {
             this.$store.commit('showMessage', { msg: `${loggedIn.msg} Please commit to some session times.` });
             this.$router.push('/settings');
           } else {
