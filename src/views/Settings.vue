@@ -61,7 +61,6 @@ import { generateRequest } from '../helpers/http';
 export default {
   mounted() {
     this.$store.commit('changeMenuVisibility', { visibility: true });
-    this.init();
   },
   data() {
     return {

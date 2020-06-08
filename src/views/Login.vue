@@ -124,23 +124,30 @@ export default {
       else {
         const loggedIn = await this.loginWithDetails();
 
-        // Check whether the user chose any session times.
-        let settings = localStorage.getItem('settings');
-        console.log(settings);
-        settings = (JSON.parse(settings)).filter(({ active }) => !active);
-        console.log(settings);
 
         const token = localStorage.getItem('token');
         if(loggedIn) {
-          if((settings || []).length > 0 && token) {
+
+          // Check whether the user chose any session times.
+          let sessions = [];
+          if (!this.$store.state.settings) {
+            const settings = JSON.parse(localStorage.getItem('settings'));
+            sessions = settings.sessions.filter(({ active }) => active !== false);
+          } else {
+            sessions = this.$store.state.settings.sessions.filter(({ active }) => active !== false);
+          }
+
+          console.log(sessions);
+
+          if(!((sessions || []).length > 0) && token) {
             this.$store.commit('showMessage', { msg: `${loggedIn.msg} Please commit to some session times.` });
             this.$router.push('/settings');
-          } else {
+          } else if(token) {
             this.$store.commit('showMessage', { msg: loggedIn.msg });
             this.$router.push('/home');
           }
         } else {
-            this.$store.commit('showMessage', { msg: loggedIn.msg });
+          this.$store.commit('showMessage', { msg: loggedIn.msg });
         }
       }
     },

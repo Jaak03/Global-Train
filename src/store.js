@@ -39,6 +39,7 @@ export default new Vuex.Store({
       show: false,
       timeout: 6000
     },
+    settings: undefined,
   },
   mutations: {
     changeMenuVisibility(state, payload) {
