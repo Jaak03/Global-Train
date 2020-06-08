@@ -19,16 +19,16 @@
      <p>Please commit to one or more of the available sessions.</p>
    </v-row>
    <v-row
-      v-for="item in session.schedule" :key="item"
+      v-for="item in (settings.sessions || [])"
+      :key="item.id"
       justify="center"
       align="center"
     >
       <v-checkbox
-        v-model="form.scheduleOption[item]"
-        :label="item"
+        v-model="item.active"
+        :label="item.time"
         @change="checkSession($event, item)"
       >
-        {{ item }}
       </v-checkbox>
     </v-row>
 
@@ -61,18 +61,12 @@ import { generateRequest } from '../helpers/http';
 export default {
   mounted() {
     this.$store.commit('changeMenuVisibility', { visibility: true });
+    this.setSettings();
+    console.log(this.settings);
   },
   data() {
     return {
-      session: {
-        schedule: [
-          '06:00',
-          '10:00',
-          '14:00',
-          '18:00'
-        ],
-        duration: [5,10,15,20]
-      },
+      settings: {},
       form: {
         scheduleOption: [],
       },
@@ -88,26 +82,20 @@ export default {
   methods: {
     change() {
       this.changed = true;
-      const settings = localStorage.getItem('settings') || [];
-      this.session.schedule.forEach((schedule) => {
-        this.form.scheduleOption[schedule] = settings.includes(schedule);
-      });
     },
-    getSessionList() {
-      const list = [];
-      this.session.schedule.forEach((session) => {
-        if (this.form.scheduleOption[session]) {
-          list.push(session);
-        }
-      });
-
-      return list;
+    setSettings() {
+      if (this.$store.state.settings) {
+        this.settings = this.$store.state.settings;
+      } else {
+        this.settings = JSON.parse(localStorage.getItem('settings'));
+        this.$store.state.settings = this.settings;
+      }
     },
     async save(next) {
       this.saving = true;
       const url = this.$store.state.api.API_URL;
       const options = generateRequest({
-          settings: this.getSessionList(),
+          settings: this.settings,
         }, this);
       
       try {
@@ -116,8 +104,7 @@ export default {
   
         this.changed = false;
         this.saving = false;
-  
-        console.log(response);
+
         localStorage.setItem('settings', this.getSessionList());
         this.$store.commit('showMessage', { msg: response.msg });
         next();
@@ -128,7 +115,7 @@ export default {
     },
     checkSession(event, name) {
       this.change();
-      console.log({ event, name, opt: this.form.scheduleOption });
+      console.log({ event, name, opt: this.$store.state.settings });
     },
   },
   beforeRouteLeave (to, from , next) {

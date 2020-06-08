@@ -132,12 +132,11 @@ export default {
           let sessions = [];
           if (!this.$store.state.settings) {
             const settings = JSON.parse(localStorage.getItem('settings'));
+            this.$store.state.settings = settings;
             sessions = settings.sessions.filter(({ active }) => active !== false);
           } else {
             sessions = this.$store.state.settings.sessions.filter(({ active }) => active !== false);
           }
-
-          console.log(sessions);
 
           if(!((sessions || []).length > 0) && token) {
             this.$store.commit('showMessage', { msg: `${loggedIn.msg} Please commit to some session times.` });
